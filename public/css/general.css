@@ -5,11 +5,23 @@
             }
             .logo2{
                         position: relative;
-                        right: 204px;
+                        right: 330px;
+                        top: 31px;
+            }
+            .logo3{
+                        position: relative;
+                        right: 580px;
                         top: 31px;
             }
         }
              .logo2 {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #8B4513;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+         .logo3 {
             font-size: 0.8rem;
             font-weight: bold;
             color: #8B4513;
