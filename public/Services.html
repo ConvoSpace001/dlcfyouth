@@ -5,21 +5,780 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services - Deeper Life Campus Fellowship</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/services.css">
-    <link rel="stylesheet" href="css/logo.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fefefe;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            z-index: 1001;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            margin-right: 1rem;
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B4513;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: normal;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .title:hover {
+            color: #CD853F;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            z-index: 1001;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #5D4037;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover {
+            color: #8B4513;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: #D2691E;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: #8B4513;
+        }
+
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1002;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(139, 69, 19, 0.1);
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #8B4513;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+            background: #D2691E;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+            background: #D2691E;
+        }
+
+        /* Mobile Menu Overlay */
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 50%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.95) 0%, rgba(210, 105, 30, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            padding-top: 120px;
+        }
+
+        .nav-overlay.active {
+            right: 0;
+        }
+
+        .nav-overlay .nav-menu {
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
+            padding: 0 2rem;
+        }
+
+        .nav-overlay .nav-menu li {
+            width: 100%;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.3s ease;
+        }
+
+        .nav-overlay.active .nav-menu li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .nav-overlay.active .nav-menu li:nth-child(1) { transition-delay: 0.1s; }
+        .nav-overlay.active .nav-menu li:nth-child(2) { transition-delay: 0.2s; }
+        .nav-overlay.active .nav-menu li:nth-child(3) { transition-delay: 0.3s; }
+        .nav-overlay.active .nav-menu li:nth-child(4) { transition-delay: 0.4s; }
+
+        .nav-overlay .nav-menu a {
+            display: block;
+            padding: 1.2rem 1.5rem;
+            color: white;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-overlay .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .nav-overlay .nav-menu a:hover::before {
+            left: 0;
+        }
+
+        .nav-overlay .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateX(10px);
+        }
+
+        .nav-overlay .nav-menu a::after {
+            display: none;
+        }
+
+        /* Background blur when menu is open */
+        .nav-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .nav-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section for Services Page */
+        .services-hero {
+            height: 60vh;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 600px;
+            padding: 2rem;
+            animation: fadeInUp 1.5s ease;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        main {
+            padding: 0;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #8B4513;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #D2691E;
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border-top: 5px solid #D2691E;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .service-card:hover::before {
+            left: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            color: #8B4513;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .service-time {
+            font-size: 1.1rem;
+            color: #D2691E;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-location {
+            color: #8B4513;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5DEB3 100%);
+            text-align: center;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--social-color), var(--social-color-light));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .social-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-card p {
+            font-size: 0.9rem;
+            color: #666;
+            position: relative;
+            z-index: 2;
+        }
+
+        .facebook {
+            --social-color: #1877f2;
+            --social-color-light: #42a5f5;
+        }
+
+        .facebook .social-icon {
+            color: #1877f2;
+        }
+
+        .youtube {
+            --social-color: #ff0000;
+            --social-color-light: #ff4444;
+        }
+
+        .youtube .social-icon {
+            color: #ff0000;
+        }
+
+        .twitter {
+            --social-color: #1da1f2;
+            --social-color-light: #42a5f5;
+        }
+
+        .twitter .social-icon {
+            color: #1da1f2;
+        }
+
+        .instagram {
+            --social-color: #e4405f;
+            --social-color-light: #f77737;
+        }
+
+        .instagram .social-icon {
+            color: #e4405f;
+        }
+
+        /* Footer */
+        footer {
+            background: #5D4037;
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer h3 {
+            margin-bottom: 1rem;
+            color: #D2691E;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Desktop Responsive */
+        @media (min-width: 1024px) and (max-width: 1366px) {
+            .title-container {
+                position: relative;
+                right: 0px;
+            }
+        }
+
+        @media (min-width: 1367px) {
+            .title-container {
+                position: relative;
+                right: 180px;
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+            }
+            li{
+                margin-right: 210px;
+            }
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .subtitle {
+                font-size: 0.75rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -50%;
+                width: 50%;
+                height: 100vh;
+                background: linear-gradient(135deg, rgba(139, 69, 19, 0.95) 0%, rgba(210, 105, 30, 0.95) 100%);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                right: 0;
+                animation: slideInRight 0.4s ease;
+            }
+
+            .nav-menu li {
+                opacity: 0;
+                transform: translateX(30px);
+                transition: all 0.3s ease;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu.active li {
+                opacity: 1;
+                transform: translateX(0);
+                animation: slideInLeft 0.3s ease forwards;
+            }
+
+            .nav-menu.active li:nth-child(1) { animation-delay: 0.1s; }
+            .nav-menu.active li:nth-child(2) { animation-delay: 0.2s; }
+            .nav-menu.active li:nth-child(3) { animation-delay: 0.3s; }
+            .nav-menu.active li:nth-child(4) { animation-delay: 0.4s; }
+
+            .nav-menu a {
+                color: white;
+                font-size: 1.2rem;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                width: 100%;
+                display: block;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .nav-menu a::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: rgba(255, 255, 255, 0.1);
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu a:hover::before {
+                left: 0;
+            }
+
+            .nav-menu a:hover {
+                background: rgba(255, 255, 255, 0.15);
+                transform: scale(1.05);
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .services-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .services-hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 3rem 1rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .service-card {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.2rem;
+            }
+
+            .subtitle {
+                font-size: 0.7rem;
+            }
+
+            .nav-menu {
+                width: 60%;
+                right: -60%;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-hero {
+                height: 50vh;
+            }
+
+            .services-hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .nav-menu {
+                width: 70%;
+                right: -70%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Background blur overlay -->
+    <div class="nav-backdrop"></div>
+
     <header>
         <nav>
-             <a href="#" class="logo"><img src="Images/logo.png" alt=""></a>
-            <a href="index.html" class="title">Deeper Life Campus Fellowship</a>
+            <a href="#" class="logo">
+                <img src="Images/logo.png" alt="DLCF Logo">
+                <div class="title-container">
+                    <div class="title">Deeper Life Campus Fellowship</div>
+                    <div class="subtitle">Youth Church, Ekiti State</div>
+                </div>
+            </a>
             
-           <ul class="nav-menu">
+            <ul class="nav-menu">
                 <li><a href="/home">Home</a></li>
-                <li><a href="/about" class="active">About</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="#" class="active">Services</a></li>
                 <li><a href="/Socials">Socials</a></li>
+                 <li><a href="/Interactions">Interactions</a></li>
             </ul>
+            
             <div class="menu-toggle">
                 <span></span>
                 <span></span>
@@ -27,6 +786,16 @@
             </div>
         </nav>
     </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="nav-overlay">
+        <ul class="nav-menu">
+            <li><a href="/home">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="#" class="active">Services</a></li>
+            <li><a href="/Socials">Socials</a></li>
+        </ul>
+    </div>
 
     <!-- Services Hero Section -->
     <section class="services-hero">
@@ -109,28 +878,62 @@
     </footer>
 
     <script>
-        // Mobile menu toggle with animation
+        // Mobile menu toggle with beautiful animations
         const menuToggle = document.querySelector('.menu-toggle');
         const navMenu = document.querySelector('.nav-menu');
+        const navOverlay = document.querySelector('.nav-overlay');
+        const navBackdrop = document.querySelector('.nav-backdrop');
+        const body = document.body;
 
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+        function openMenu() {
+            navOverlay.classList.add('active');
+            navBackdrop.classList.add('active');
+            menuToggle.classList.add('active');
+            body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            navOverlay.classList.remove('active');
+            navBackdrop.classList.remove('active');
+            menuToggle.classList.remove('active');
+            body.style.overflow = 'auto';
+        }
+
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navOverlay.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
         // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            });
+        document.querySelectorAll('.nav-overlay .nav-menu a').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
+
+        // Close mobile menu when clicking on backdrop
+        navBackdrop.addEventListener('click', closeMenu);
 
         // Close mobile menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (!menuToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
+            if (!menuToggle.contains(e.target) && 
+                !navOverlay.contains(e.target) && 
+                navOverlay.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+
+        // Prevent menu from closing when clicking inside overlay
+        navOverlay.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Handle escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navOverlay.classList.contains('active')) {
+                closeMenu();
             }
         });
 
@@ -184,6 +987,13 @@
                     card.style.animationDelay = `${index * 0.2}s`;
                 }, index * 100);
             });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
         });
     </script>
 </body>
