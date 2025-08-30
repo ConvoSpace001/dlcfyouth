@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Points & Testimonies - Deeper Life Campus Fellowship</title>
+    <link rel="stylesheet" href="css/logo.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fefefe;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .logo1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B4513;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo1:hover {
+            color: #CD853F;
+        }
+
+        .logo2 {
+            font-size: 0.9rem;
+            color: #666;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #5D4037;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a:hover {
+            color: #8B4513;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: #D2691E;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 9999;
+            position: relative;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #8B4513;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Hamburger animation */
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Mobile Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .page-hero {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+            height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,1000 1000,800 1000,1000"/></svg>');
+            background-size: cover;
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto 3rem auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            background: transparent;
+            color: #8B4513;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+            border-top: 5px solid #D2691E;
+        }
+
+        .form-section h2 {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .form-section p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #8B4513;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #D2691E;
+            background: white;
+            box-shadow: 0 0 15px rgba(210, 105, 30, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 2rem auto 0;
+            min-width: 200px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Error Message */
+        .error-message {
+            display: none;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+            animation: slideIn 0.5s ease;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* Loading State */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #8B4513;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Inspirational Quotes Section */
+        .quotes-section {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F5DEB3 100%);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .quote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #8B4513;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            color: #5D4037;
+            font-weight: 600;
+        }
+
+        /* Form Grid for Two Columns */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .form-grid .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            background: rgba(139, 69, 19, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 4px solid #D2691E;
+        }
+
+        .privacy-notice p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            /* Show hamburger menu */
+            .menu-toggle {
+                display: flex;
+            }
+
+            /* Mobile nav menu styles */
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                left: -50%;
+                width: 50%;
+                height: 100vh;
+                background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                transition: left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                z-index: 999;
+                box-shadow: 2px 0 20px rgba(0,0,0,0.3);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                opacity: 0;
+                transform: translateX(-30px);
+                transition: all 0.4s ease;
+                width: 80%;
+                text-align: center;
+            }
+
+            .nav-menu.active li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            .nav-menu.active li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-menu.active li:nth-child(2) { transition-delay: 0.15s; }
+            .nav-menu.active li:nth-child(3) { transition-delay: 0.2s; }
+            .nav-menu.active li:nth-child(4) { transition-delay: 0.25s; }
+            .nav-menu.active li:nth-child(5) { transition-delay: 0.3s; }
+
+            .nav-menu a {
+                color: white !important;
+                font-size: 1.2rem;
+                padding: 1rem 1.5rem;
+                text-align: center;
+                width: 100%;
+                display: block;
+                border-radius: 10px;
+                margin: 0.5rem 0;
+                border: 1px solid rgba(255,255,255,0.2);
+                transition: all 0.3s ease;
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .nav-menu a:hover {
+                color: #FFF8DC !important;
+                background: rgba(255,255,255,0.15);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+
+            /* Page hero adjustments */
+            .page-hero {
+                margin-top: 70px;
+            }
+
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .main-container {
+                padding: 2rem 1rem;
+            }
+
+            .form-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tabs-container {
+                flex-direction: column;
+                max-width: 280px;
+            }
+
+            .tab-button {
+                margin-bottom: 0.5rem;
+                border-radius: 15px;
+            }
+
+            /* Logo adjustments for mobile */
+            .logo1 {
+                font-size: 1.3rem;
+            }
+
+            .logo2 {
+                font-size: 0.8rem;
+            }
+
+            .logo img {
+                height: 35px;
+            }
+
+            header {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-menu {
+                width: 60%;
+                left: -60%;
+            }
+
+            .logo1 {
+                font-size: 1.1rem;
+            }
+
+            .logo2 {
+                display: none;
+            }
+
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .form-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div style="display: flex; align-items: center;">
+                <a href="#" class="logo"><img src="Images/logo.png" alt="DLCF Logo"></a>
+                <div>
+                    <a href="#" class="logo1">Deeper Life Campus Fellowship</a>
+                    <a href="#" class="logo2"> Youth Church, Ekiti - State</a>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/Services">Services</a></li>
+                <li><a href="/Socials">Socials</a></li>
+                <li><a href="/Interactions">Interactions</a></li>
+            </ul>
+            
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay"></div>
+
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1>Prayer Points & Testimonies</h1>
+            <p>"The prayer of a righteous person is powerful and effective." - James 5:16</p>
+        </div>
+    </section>
+
+    <div class="main-container">
+        <div class="tabs-container">
+            <button class="tab-button active" onclick="switchTab('prayer')">Prayer Points</button>
+            <button class="tab-button" onclick="switchTab('testimony')">Testimonies</button>
+        </div>
+
+        <!-- Prayer Points Tab -->
+        <div id="prayer-tab" class="tab-content active">
+            <div class="form-section">
+                <h2>Submit a Prayer Request</h2>
+                <p>Share your prayer needs with our church family. We believe in the power of collective prayer.</p>
+                
+                <form id="prayer-form" action="https://formspree.io/f/mkgvroog" method="POST">
+                    <!-- Hidden field to identify form type -->
+                    <input type="hidden" name="Form Type" value="Prayer Request">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="prayer-name">Your Name (Optional)</label>
+                            <input type="text" id="prayer-name" name="Name" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="prayer-contact">Contact (Optional)</label>
+                            <input type="text" id="prayer-contact" name="Contact" placeholder="Phone or Email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="prayer-category">Prayer Category</label>
+                            <select id="prayer-category" name="Category" required>
+                                <option value="">Select a category</option>
+                                <option value="Health">Health & Healing</option>
+                                <option value="Family">Family & Relationships</option>
+                                <option value="Finances">Financial Breakthrough</option>
+                                <option value="Career">Career & Education</option>
+                                <option value="Salvation">Salvation</option>
+                                <option value="Guidance">Guidance & Direction</option>
+                                <option value="Protection">Protection & Safety</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="prayer-request">Prayer Request Details</label>
+                            <textarea id="prayer-request" name="Request" placeholder="Please share your prayer request. Be as specific as you feel comfortable." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-notice">
+                        <p><strong>Privacy Notice:</strong> Your prayer requests will be shared with our prayer team and pastoral staff. If you check "anonymous," your name and contact information will not be shared, but the prayer need will still be prayed for.</p>
+                    </div>
+                    
+                    <div class="loading" id="prayer-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Submitting your prayer request...</p>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="prayer-submit-btn">Submit Prayer Request</button>
+                </form>
+                
+                <div id="prayer-success" class="success-message">
+                    <h3>🙏 Prayer Request Submitted Successfully!</h3>
+                    <p>Thank you for sharing your prayer request. Our prayer team will lift this up in prayer. May God's peace be with you.</p>
+                </div>
+                
+                <div id="prayer-error" class="error-message">
+                    <h3>❌ Submission Failed</h3>
+                    <p>We're sorry, there was an error submitting your prayer request. Please try again or contact us directly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonies Tab -->
+        <div id="testimony-tab" class="tab-content">
+            <div class="form-section">
+                <h2>Share Your Testimony</h2>
+                <p>Give God glory by sharing how He has moved in your life. Your testimony can encourage others!</p>
+                
+                <form id="testimony-form" action="https://formspree.io/f/mkgvroog" method="POST">
+                    <!-- Hidden field to identify form type -->
+                    <input type="hidden" name="Form Type" value="Testimony">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="testimony-name">Your Name</label>
+                            <input type="text" id="testimony-name" name="Name" placeholder="Enter your name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimony-contact">Contact Information</label>
+                            <input type="text" id="testimony-contact" name="Contact" placeholder="Phone or Email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimony-category">Testimony Category</label>
+                            <select id="testimony-category" name="Category" required>
+                                <option value="">Select a category</option>
+                                <option value="salvation">Salvation</option>
+                                <option value="healing">Divine Healing</option>
+                                <option value="provision">Financial Provision</option>
+                                <option value="protection">Divine Protection</option>
+                                <option value="breakthrough">Breakthrough</option>
+                                <option value="restoration">Restoration</option>
+                                <option value="answered-prayer">Answered Prayer</option>
+                                <option value="other">Other Blessing</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="testimony-date">When Did This Happen?</label>
+                            <input type="date" id="testimony-date" name="Date" required>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="testimony-title">Testimony Title</label>
+                            <input type="text" id="testimony-title" name="Title" placeholder="Give your testimony a short title" required>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="testimony-story">Your Testimony</label>
+                            <textarea id="testimony-story" name="Story" placeholder="Share your testimony in detail. How did God move in your situation? What was the outcome? How has this impacted your faith?" required></textarea>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="testimony-scripture">Relevant Scripture (Optional)</label>
+                            <input type="text" id="testimony-scripture" name="Scripture" placeholder="Any Bible verse that relates to your testimony">
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-notice">
+                        <p><strong>Sharing Policy:</strong> Testimonies may be shared during church services, in our newsletter, or on our website to encourage other believers. We will always ask for your permission before sharing publicly.</p>
+                    </div>
+                    
+                    <div class="loading" id="testimony-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Submitting your testimony...</p>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="testimony-submit-btn">Submit Testimony</button>
+                </form>
+                
+                <div id="testimony-success" class="success-message">
+                    <h3>✨ Testimony Submitted Successfully!</h3>
+                    <p>Thank you for sharing how God has moved in your life! Your testimony will be reviewed and may be shared to encourage others. Glory to God!</p>
+                </div>
+                
+                <div id="testimony-error" class="error-message">
+                    <h3>❌ Submission Failed</h3>
+                    <p>We're sorry, there was an error submitting your testimony. Please try again or contact us directly.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inspirational Quotes Section -->
+        <div class="quotes-section">
+            <div class="quote">
+                "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God."
+            </div>
+            <div class="quote-author">- Philippians 4:6</div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tab) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tab + '-tab').classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Mobile menu toggle functionality
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const menuOverlay = document.querySelector('.menu-overlay');
+        const body = document.body;
+
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', () => {
+            if (navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Close menu when clicking on nav links
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Enhanced form submission handler for Prayer Form
+        document.getElementById('prayer-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = document.getElementById('prayer-submit-btn');
+            const loading = document.getElementById('prayer-loading');
+            const successMsg = document.getElementById('prayer-success');
+            const errorMsg = document.getElementById('prayer-error');
+            
+            // Hide previous messages
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+            
+            // Show loading state
+            loading.classList.add('show');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const formData = new FormData(form);
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                // Hide loading state
+                loading.classList.remove('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Prayer Request';
+                
+                if (response.ok) {
+                    // Reset form
+                    form.reset();
+                    
+                    // Show success message
+                    successMsg.classList.add('show');
+                    
+                    // Hide success message after 8 seconds
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 8000);
+                    
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                
+                // Hide loading state
+                loading.classList.remove('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Prayer Request';
+                
+                // Show error message
+                errorMsg.classList.add('show');
+                
+                // Hide error message after 8 seconds
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 8000);
+                
+                // Scroll to error message
+                errorMsg.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Enhanced form submission handler for Testimony Form
+        document.getElementById('testimony-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            const submitBtn = document.getElementById('testimony-submit-btn');
+            const loading = document.getElementById('testimony-loading');
+            const successMsg = document.getElementById('testimony-success');
+            const errorMsg = document.getElementById('testimony-error');
+            
+            // Hide previous messages
+            successMsg.classList.remove('show');
+            errorMsg.classList.remove('show');
+            
+            // Show loading state
+            loading.classList.add('show');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            try {
+                const formData = new FormData(form);
+                
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                // Hide loading state
+                loading.classList.remove('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Testimony';
+                
+                if (response.ok) {
+                    // Reset form
+                    form.reset();
+                    
+                    // Show success message
+                    successMsg.classList.add('show');
+                    
+                    // Hide success message after 8 seconds
+                    setTimeout(() => {
+                        successMsg.classList.remove('show');
+                    }, 8000);
+                    
+                    // Scroll to success message
+                    successMsg.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                
+                // Hide loading state
+                loading.classList.remove('show');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Testimony';
+                
+                // Show error message
+                errorMsg.classList.add('show');
+                
+                // Hide error message after 8 seconds
+                setTimeout(() => {
+                    errorMsg.classList.remove('show');
+                }, 8000);
+                
+                // Scroll to error message
+                errorMsg.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+
+        // Enhanced form validation
+        function validateForm(form) {
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#e74c3c';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Add real-time validation
+        document.querySelectorAll('input, textarea, select').forEach(field => {
+            field.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#e74c3c';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+            
+            // Remove error border on input
+            field.addEventListener('input', function() {
+                if (this.style.borderColor === 'rgb(231, 76, 60)') {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            }
+        });
+
+        // Auto-resize textarea
+        document.querySelectorAll('textarea').forEach(textarea => {
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+        });
+
+        // Form submission prevention for double-clicks
+        let isSubmitting = false;
+        
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                if (isSubmitting) {
+                    return false;
+                }
+                isSubmitting = true;
+                
+                // Reset after 3 seconds
+                setTimeout(() => {
+                    isSubmitting = false;
+                }, 3000);
+            });
+        });
+
+        // Close menu on window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        // Prevent menu toggle during form submission
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function() {
+                menuToggle.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    menuToggle.style.pointerEvents = 'auto';
+                }, 3000);
+            });
+        });
